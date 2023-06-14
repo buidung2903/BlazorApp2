@@ -1,0 +1,45 @@
+﻿@page "/products"
+@inject HttpClient Http
+@inject IModalService modal
+<PageTitle>Product List</PageTitle>
+
+@using BlazorApp2.Data
+@using Models.EntityClass;
+
+<h1>Product List</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+<button @onclick="@(()=>modal.Show<FetchData>("Add Product"))" class="btn btn-primary">Add Product</button>
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Sku</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Sku</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Product>? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Http.GetFromJsonAsync<List<Product>>("product-api/Products/Get");
+    }
+}
