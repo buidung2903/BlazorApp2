@@ -4,12 +4,16 @@
 <PageTitle>Product List</PageTitle>
 
 @using BlazorApp2.Data
+@using BlazorApp2.Pages.Modal;
 @using Models.EntityClass;
 
 <h1>Product List</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
-<button @onclick="@(()=>modal.Show<FetchData>("Add Product"))" class="btn btn-primary">Add Product</button>
+<button @onclick="@(()=>modal.Show<CommonCUModal>
+("Add Product", new ModalParameters().Add(nameof(CommonCUModal.IsCreateCustomer), false)))"
+        class="btn btn-primary">
+    Add Product
+</button>
 @if (products == null)
 {
     <p><em>Loading...</em></p>

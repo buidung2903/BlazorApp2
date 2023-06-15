@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Models.Models;
 using Services.Interfaces;
+using Services.MediatorPattern;
 using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FFDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"), x => x.MigrationsAssembly("Models")));
 builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<IMediator, ConcreteMediator>();
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new MapperProfile());

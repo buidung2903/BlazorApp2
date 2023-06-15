@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\product-css\" />
+    <Folder Include="wwwroot\css\customer-css\" />
+  </ItemGroup>
+
 </Project>
