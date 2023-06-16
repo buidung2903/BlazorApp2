@@ -6,9 +6,11 @@ using Models.Models;
 using Services.Interfaces;
 using Services.MediatorPattern;
 using Services.Services;
+using Helper.Extensions;
+using Microsoft.AspNetCore.Hosting.Server;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.WebHost.UseUrls("https://localhost:9999");
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -18,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FFDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"), x => x.MigrationsAssembly("Models")));
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IMediator, ConcreteMediator>();
+builder.Services.AddConsulConfig(builder.Configuration);
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new MapperProfile());
@@ -25,7 +28,6 @@ var mapperConfig = new MapperConfiguration(mc =>
 
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseConsul("https://localhost:9999");
 
 app.MapControllers();
 

@@ -6,11 +6,11 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7261
+          "Port": 9999
         }
       ],
       "UpstreamPathTemplate": "/customer-api/{controller}/{action}",
-      "UpstreamHttpMethod": [ "Get" , "Post", "Put", "Delete"]
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
     {
       "DownstreamPathTemplate": "/product-api/{controller}/{action}",
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7207
+          "Port": 9998
         }
       ],
       "UpstreamPathTemplate": "/product-api/{controller}/{action}",
@@ -26,6 +26,11 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7040"
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "PollConsul",
+      "PollingInterval": 100
+    }
   }
 }
