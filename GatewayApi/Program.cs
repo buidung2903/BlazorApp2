@@ -5,7 +5,6 @@ using Ocelot.Provider.Consul;
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("ocelot.json").Build();
 // Add services to the container.
-builder.WebHost.UseUrls("https://localhost:9000");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

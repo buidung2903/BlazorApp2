@@ -10,7 +10,6 @@ using Helper.Extensions;
 using Microsoft.AspNetCore.Hosting.Server;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("https://localhost:9999");
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -41,7 +40,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseConsul("https://localhost:9999");
+app.UseConsul("http://localhost:7261", "CustomerService");
 
 app.MapControllers();
 

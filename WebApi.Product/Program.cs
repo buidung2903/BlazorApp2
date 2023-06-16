@@ -8,7 +8,6 @@ using Services.Services;
 using Helper.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("https://localhost:9998");
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -39,7 +38,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseConsul("https://localhost:9998");
+app.UseConsul("http://localhost:7207", "ProductService");
 
 app.MapControllers();
 

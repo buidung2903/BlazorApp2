@@ -14,7 +14,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped(x => new HttpClient
 {
-    BaseAddress = new Uri("https://localhost:9000/")
+    BaseAddress = new Uri("http://localhost:7040/")
 });
 builder.Services.AddBlazoredModal();
 var app = builder.Build();

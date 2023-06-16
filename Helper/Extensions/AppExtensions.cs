@@ -26,19 +26,20 @@ namespace Helper.Extensions
             return services;
         }
 
-        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, string address)
+        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, string applicationUrl, string serviceName)
         {
             var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
             var logger = app.ApplicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("AppExtensions");
-            var lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
+            var lifetime = app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
 
             if (!(app.Properties["server.Features"] is FeatureCollection features)) return app;
-
+            var addresses = features.Get<IServerAddressesFeature>();
+            var address = addresses?.Addresses.FirstOrDefault() ?? applicationUrl;
             var uri = new Uri(address);
             var registration = new AgentServiceRegistration()
             {
-                ID = $"MyService-{uri.Port}",
-                Name = "MyService",
+                ID = $"{serviceName}_ID",
+                Name = serviceName,
                 Address = $"{uri.Host}",
                 Port = uri.Port
             };
