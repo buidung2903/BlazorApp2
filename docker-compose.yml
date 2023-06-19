@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  webapi.customer:
+    image: ${DOCKER_REGISTRY-}webapicustomer
+    ports:
+      - 7261:7261
+    build:
+      context: .
+      dockerfile: WebApi.Customer\Dockerfile
+    environment:
+      - HTTPS=on
+
+  webapi.product:
+    image: ${DOCKER_REGISTRY-}webapiproduct
+    ports:
+      - 7207:7207
+    build:
+      context: .
+      dockerfile: WebApi.Product\Dockerfile
+
+
+  gatewayapi:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    ports:
+      - 7040:7040
+    build:
+      context: .
+      dockerfile: GatewayApi\Dockerfile
+
+
+  blazorapp2:
+    image: ${DOCKER_REGISTRY-}blazorapp2
+    build:
+      context: .
+      dockerfile: BlazorApp2\Dockerfile
+
