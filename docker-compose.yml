@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: WebApi.Customer\Dockerfile
     networks: 
-      - common_network
+      - database
     depends_on:
       - customerdb
     environment:
@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: WebApi.Product\Dockerfile
     networks: 
-      - common_network
+      - database
     depends_on:
       - customerdb
     environment:
@@ -55,9 +55,8 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Ad290399@
     networks:
-      - common_network
+      - database
     ports:
-      - 1433:1433
+      - 8001:1433
 networks:
-  common_network:
-    name: common_network
+  database:
