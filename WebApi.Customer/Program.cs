@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<FFDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"), x => x.MigrationsAssembly("Models")));
+builder.Services.AddDbContext<FFDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStringMigration"), x => x.MigrationsAssembly("Models")));
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IMediator, ConcreteMediator>();
 builder.Services.AddConsulConfig(builder.Configuration);
