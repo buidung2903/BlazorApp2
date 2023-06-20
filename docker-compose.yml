@@ -8,8 +8,14 @@ services:
     build:
       context: .
       dockerfile: WebApi.Customer\Dockerfile
+    networks: 
+      - common_network
+    depends_on:
+      - customerdb
     environment:
-      - HTTPS=on
+      - DB_HOST=customerdb
+      - DB_NAME=project_myself
+      - DB_SA_PASSWORD=Ad290399@
 
   webapi.product:
     image: ${DOCKER_REGISTRY-}webapiproduct
@@ -18,7 +24,14 @@ services:
     build:
       context: .
       dockerfile: WebApi.Product\Dockerfile
-
+    networks: 
+      - common_network
+    depends_on:
+      - customerdb
+    environment:
+      - DB_HOST=customerdb
+      - DB_NAME=project_myself
+      - DB_SA_PASSWORD=Ad290399@
 
   gatewayapi:
     image: ${DOCKER_REGISTRY-}gatewayapi
@@ -34,4 +47,17 @@ services:
     build:
       context: .
       dockerfile: BlazorApp2\Dockerfile
-
+   
+  customerdb:
+    container_name: customer-db
+    image: justin2004/mssql_server_tiny
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Ad290399@
+    networks:
+      - common_network
+    ports:
+      - 1433:1433
+networks:
+  common_network:
+    name: common_network

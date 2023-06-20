@@ -18,7 +18,7 @@ public partial class FFDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=SQL5106.site4now.net;Initial Catalog=db_a9a28e_projectmyself;User Id=db_a9a28e_projectmyself_admin;Password=Ad290399@;Trusted_Connection=True;TrustServerCertificate=True;Integrated Security=false");
+        => optionsBuilder.UseSqlServer("Server=customerdb;Database=project_myself;User Id=sa;Password=Ad290399@;Trusted_Connection=True;TrustServerCertificate=True;Integrated Security=false");
     public virtual DbSet<Customer> Customers { get; set; }
     public virtual DbSet<Product> Products { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
