@@ -19,6 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1F380EB5-19BC-40FA-B8AC-AEDCA213EE3A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceApi", "ServiceApi", "{E44C71EE-9E2F-4173-870C-16D1DB711CF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{B54C464E-F019-429C-9F7E-73D5423A7C0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{A8ABFC2D-135E-4495-8C79-ABF8F57A6BAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +66,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{431392EB-8BAA-4D51-A660-9D9957C9EFB9} = {E44C71EE-9E2F-4173-870C-16D1DB711CF4}
+		{71037C12-BE29-4CD4-838F-1112B440B497} = {E44C71EE-9E2F-4173-870C-16D1DB711CF4}
+		{3B6294FB-017B-482B-91A3-2D6AC4F1A94A} = {B54C464E-F019-429C-9F7E-73D5423A7C0E}
+		{1F380EB5-19BC-40FA-B8AC-AEDCA213EE3A} = {A8ABFC2D-135E-4495-8C79-ABF8F57A6BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {565BC553-E9E1-4D69-8DD2-773C8E364CA1}
