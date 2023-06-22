@@ -7,11 +7,15 @@
 @using BlazorApp2.Data
 @using BlazorApp2.Pages.Modal;
 @using Models.EntityClass;
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor
 
 <h1>Customer List</h1>
 
 <button @onclick="@(()=>modal.Show<CommonCUModal>
-("Add Customer", new ModalParameters().Add(nameof(CommonCUModal.IsCreateCustomer), true)))"
+("Add Customer", new ModalParameters()
+    .Add(nameof(CommonCUModal.IsCreateCustomer), true)
+    .Add(nameof(CommonCUModal.Action), "Add")))"
         class="btn btn-primary">
     Add Customer
 </button>
@@ -21,7 +25,15 @@
 }
 else
 {
-    <table class="table">
+    <SfGrid DataSource="@customers">
+        <GridColumns>
+            <GridColumn Field="@nameof(Customer.Name)"></GridColumn>
+            <GridColumn Field="@nameof(Customer.Phone)"></GridColumn>
+            <GridColumn Field="@nameof(Customer.Address)"></GridColumn>
+            <GridColumn Field="@nameof(Customer.Email)"></GridColumn>
+        </GridColumns>
+    </SfGrid>
+    @*<table class="table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -50,7 +62,7 @@ else
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
 }
 
 @code {

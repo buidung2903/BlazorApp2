@@ -50,6 +50,8 @@
 @code {
     [Parameter] public bool IsCreateCustomer { get; set; }
 
+    [Parameter] public string Action { get; set; }
+
     public string Name{ get; set; }
 
     [Parameter] public int? Id { get; set; }
@@ -60,15 +62,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (IsCreateCustomer)
+        if (Action != "Add")
         {
-            customer = await Http.GetFromJsonAsync<Customer>("/customer-api/Customers/Get/" + Id);
-            Name = customer.Name;
-        }
-        else
-        {
-            product = await Http.GetFromJsonAsync<Product>("/product-api/Products/Get/" + Id);
-            Name = product.Name;
+            if (IsCreateCustomer)
+            {
+                customer = await Http.GetFromJsonAsync<Customer>("/customer-api/Customers/Get/" + Id);
+                Name = customer.Name;
+            }
+            else
+            {
+                product = await Http.GetFromJsonAsync<Product>("/product-api/Products/Get/" + Id);
+                Name = product.Name;
+            }
         }
     }
 
