@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Services.MediatorPattern
     public class ConcreteMediator : IMediator
     {
         private readonly ILogger<ConcreteMediator> _logger;
+        private static Logger logger = LogManager.GetLogger("ConcreteMediator");
 
         public ConcreteMediator(ILogger<ConcreteMediator> logger)
         {
@@ -18,7 +20,7 @@ namespace Services.MediatorPattern
 
         public void LogInformationAction(dynamic sender, string ev)
         {
-            _logger.LogInformation($"Create {ev} with id {sender.Id} successfully!");
+            _logger.LogInformation($"Create {ev} with id {sender} successfully!");
         }
     }
 }

@@ -31,21 +31,6 @@ namespace Services.Services
         public async Task<List<Customer>> GetListCustomers() 
             => await _context.Customers.ToListAsync();
 
-        public async Task<bool> CreateCustomer(CustomerDto customerDto)
-        {
-            try
-            {
-                var customer = _mapper.Map<Customer>(customerDto);
-                await _context.Customers.AddAsync(customer);
-                await _context.SaveChangesAsync();
-                _mediator.LogInformationAction(customer, "customer");
-                return true;
-            }
-            catch (Exception ex) 
-            {
-                _logger.LogError(ex.Message);
-                return false;
-            }
-        }
+        public async Task Notify(int customerId) => _mediator.LogInformationAction(customerId, "customer");
     }
 }

@@ -11,6 +11,6 @@ namespace Services.Interfaces
     public interface ICustomerService
     {
         Task<List<Customer>> GetListCustomers();
-        Task<bool> CreateCustomer(CustomerDto customerDto);
+        Task Notify(int customerId);
     }
 }

@@ -8,6 +8,7 @@
     <div class="mt-md-2">
         <label class="col-md-2">Name</label>
         <input class="col-md-9" type="text" name="name" id="name" @bind-value="Name" />
+        <input hidden type="text" name="id" id="id" @bind-value="Id" />
     </div>
     @if (IsCreateCustomer)
     {
@@ -32,10 +33,18 @@
             <input class="col-md-9" type="text" name="sku" id="sku" @bind-value="product.Sku" />
         </div>
     }
-
-    <div class="mt-md-2 tl-center">
-        <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? CreateCustomer : CreateProduct">@(IsCreateCustomer ? "Add Customer" : "Add Product")</button>
-    </div>
+    @if (Id == null)
+    {
+        <div class="mt-md-2 tl-center">
+            <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? CreateCustomer : CreateProduct">@(IsCreateCustomer ? "Add Customer" : "Add Product")</button>
+        </div>
+    }
+    else
+    {
+        <div class="mt-md-2 tl-center">
+            <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? UpdateCustomer : UpdateProduct">@(IsCreateCustomer ? "Update Customer" : "Update Product")</button>
+        </div>
+    }
 </form>
 
 @code {
@@ -43,14 +52,46 @@
 
     public string Name{ get; set; }
 
+    [Parameter] public int? Id { get; set; }
+
     Customer customer = new Customer();
 
     Product product = new Product();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (IsCreateCustomer)
+        {
+            customer = await Http.GetFromJsonAsync<Customer>("/customer-api/Customers/Get/" + Id);
+            Name = customer.Name;
+        }
+        else
+        {
+            product = await Http.GetFromJsonAsync<Product>("/product-api/Products/Get/" + Id);
+            Name = product.Name;
+        }
+    }
 
     protected async Task CreateCustomer()
     {
         customer.Name = Name;
         var response = await Http.PostAsJsonAsync("/customer-api/Customers/Post", customer);
+        Cancel();
+    }
+
+    protected async Task UpdateCustomer()
+    {
+        customer.Name = Name;
+        customer.Id = Id ?? default;
+        var response = await Http.PutAsJsonAsync("/customer-api/Customers/Put", customer);
+        Cancel();
+    }
+
+    protected async Task UpdateProduct()
+    {
+        product.Name = Name;
+        product.Id = Id ?? default;
+        var response = await Http.PutAsJsonAsync("/product-api/Products/Put", product);
         Cancel();
     }
 

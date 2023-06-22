@@ -5,6 +5,7 @@ using Models.AbstractClass;
 using Models.Dtos;
 using Models.EntityClass;
 using Models.Models;
+using NLog;
 using Services.Interfaces;
 using Services.MediatorPattern;
 using System;
@@ -20,6 +21,7 @@ namespace Services.Services
         private readonly FFDbContext _context;
         private readonly ILogger<CustomerService> _logger;
         private readonly IMapper _mapper;
+        private static Logger logger = LogManager.GetLogger("ProductService");
 
         public ProductService(IMediator mediator ,FFDbContext context, ILogger<CustomerService> logger, IMapper mapper) : base(mediator) 
         {
@@ -31,21 +33,6 @@ namespace Services.Services
         public async Task<List<Product>> GetListProducts() 
             => await _context.Products.ToListAsync();
 
-        public async Task<bool> CreateProduct(ProductDto productDto)
-        {
-            try
-            {
-                var product = _mapper.Map<Product>(productDto);
-                await _context.Products.AddAsync(product);
-                await _context.SaveChangesAsync();
-                _mediator.LogInformationAction(product, "product");
-                return true;
-            }
-            catch (Exception ex) 
-            {
-                _logger.LogError(ex.Message);
-                return false;
-            }
-        }
+        public async Task Notify(int productId) => _mediator.LogInformationAction(productId, "product");
     }
 }

@@ -1,0 +1,65 @@
+2023-06-21 14:03:37.7652 Info Message Template Auto Format enabled
+2023-06-21 14:03:37.7738 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:03:37.7738 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:03:37.8190 Info Closing old configuration.
+2023-06-21 14:03:37.8437 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:03:43.9705 Info Message Template Auto Format enabled
+2023-06-21 14:03:44.7675 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:03:44.7744 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:03:44.8637 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:07:05.1718 Info Configuration file change detected! Reloading in 1000ms...
+2023-06-21 14:07:06.2054 Info Reloading configuration...
+2023-06-21 14:07:06.2347 Info Loading NLog config from XML file: C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:07:06.2347 Info Message Template Auto Format enabled
+2023-06-21 14:07:06.2347 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:07:06.2347 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:07:06.2481 Info Closing old configuration.
+2023-06-21 14:07:06.3037 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:09:00.9342 Info Message Template Auto Format enabled
+2023-06-21 14:09:01.1545 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:09:01.1545 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:09:01.2849 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:13:47.0126 Info Configuration file change detected! Reloading in 1000ms...
+2023-06-21 14:13:48.0364 Info Reloading configuration...
+2023-06-21 14:13:48.0433 Info Loading NLog config from XML file: C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:13:48.0433 Info Message Template Auto Format enabled
+2023-06-21 14:13:48.0433 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:13:48.0433 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:13:48.0544 Info Closing old configuration.
+2023-06-21 14:13:48.1010 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:14:16.5687 Info Configuration file change detected! Reloading in 1000ms...
+2023-06-21 14:14:17.5833 Info Reloading configuration...
+2023-06-21 14:14:17.5852 Info Loading NLog config from XML file: C:\BlazorApp2\WebApi.Product\NLog.config
+2023-06-21 14:38:21.6473 Info Message Template Auto Format enabled
+2023-06-21 14:38:21.8023 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:38:21.8060 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:38:21.8700 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:38:25.3438 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:46:14.2099 Info Message Template Auto Format enabled
+2023-06-21 14:46:14.4213 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:46:14.4213 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:46:14.4913 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:48:37.9080 Info Message Template Auto Format enabled
+2023-06-21 14:48:38.0174 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:48:38.0174 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:48:38.0706 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:51:03.7586 Info Message Template Auto Format enabled
+2023-06-21 14:51:03.9301 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:51:03.9301 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:51:04.0196 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:51:05.7509 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:59:47.0823 Info Message Template Auto Format enabled
+2023-06-21 14:59:47.2359 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 14:59:47.2359 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 14:59:47.2956 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 14:59:48.5633 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 15:03:17.0019 Info Message Template Auto Format enabled
+2023-06-21 15:03:17.1737 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 15:03:17.1793 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 15:03:17.2528 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 15:03:19.3950 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 15:03:38.9016 Info Message Template Auto Format enabled
+2023-06-21 15:03:39.0665 Info Registered target NLog.Targets.FileTarget(Name=alldata)
+2023-06-21 15:03:39.0701 Info Registered target NLog.Targets.FileTarget(Name=otherFile-web)
+2023-06-21 15:03:39.1332 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config
+2023-06-21 15:03:40.6840 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\BlazorApp2\WebApi.Product\bin\Debug\net6.0\nlog.config

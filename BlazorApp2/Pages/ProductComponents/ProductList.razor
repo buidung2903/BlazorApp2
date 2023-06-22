@@ -1,6 +1,7 @@
 ﻿@page "/products"
 @inject HttpClient Http
 @inject IModalService modal
+@inject NavigationManager NavigationManager
 <PageTitle>Product List</PageTitle>
 
 @using BlazorApp2.Data
@@ -25,6 +26,7 @@ else
             <tr>
                 <th>Name</th>
                 <th>Sku</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +35,14 @@ else
                 <tr>
                     <td>@product.Name</td>
                     <td>@product.Sku</td>
+                    <td>
+                        <div @onclick="@(()=> modal.Show<CommonCUModal>("Update Product",
+                            new ModalParameters()
+                            .Add(nameof(CommonCUModal.IsCreateCustomer), false)
+                            .Add(nameof(CommonCUModal.Id), product.Id)))"
+                             class="oi oi-pencil"></div>
+                        <div @onclick="@(() => DeleteProduct(product.Id))" class="oi oi-delete"></div>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -45,5 +55,16 @@ else
     protected override async Task OnInitializedAsync()
     {
         products = await Http.GetFromJsonAsync<List<Product>>("product-api/Products/Get");
+    }
+
+    protected async Task DeleteProduct(int id)
+    {
+        var response = await Http.DeleteAsync("/product-api/Products/Delete?id=" + id);
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/products", true);
     }
 }

@@ -11,6 +11,6 @@ namespace Services.Interfaces
     public interface IProductService
     {
         Task<List<Product>> GetListProducts();
-        Task<bool> CreateProduct(ProductDto productDto);
+        Task Notify(int productId);
     }
 }

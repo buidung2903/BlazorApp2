@@ -1,6 +1,7 @@
 ﻿@page "/customers"
 @inject HttpClient Http
 @inject IModalService modal
+@inject NavigationManager NavigationManager
 <PageTitle>Customer List</PageTitle>
 
 @using BlazorApp2.Data
@@ -27,6 +28,7 @@ else
                 <th>Phone</th>
                 <th>Address</th>
                 <th>Email</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +39,14 @@ else
                     <td>@customer.Phone</td>
                     <td>@customer.Address</td>
                     <td>@customer.Email</td>
+                    <td>
+                        <div @onclick="@(()=> modal.Show<CommonCUModal>("Update Customer",
+                            new ModalParameters()
+                            .Add(nameof(CommonCUModal.IsCreateCustomer), true)
+                            .Add(nameof(CommonCUModal.Id), customer.Id)))"
+                            class="oi oi-pencil"></div>
+                        <div @onclick="@(() => DeleteCustomer(customer.Id))" class="oi oi-delete"></div>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -49,5 +59,16 @@ else
     protected override async Task OnInitializedAsync()
     {
         customers = await Http.GetFromJsonAsync<List<Customer>>("customer-api/Customers/Get");
+    }
+
+    protected async Task DeleteCustomer(int id)
+    {
+        var response = await Http.DeleteAsync("/customer-api/Customers/Delete?id=" + id);
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/customers", true);
     }
 }
