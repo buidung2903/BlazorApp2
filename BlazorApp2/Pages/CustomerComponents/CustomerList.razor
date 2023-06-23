@@ -9,68 +9,65 @@
 @using Models.EntityClass;
 @using Syncfusion.Blazor.Grids
 @using Syncfusion.Blazor
-
+@using Syncfusion.Blazor.Data
 <h1>Customer List</h1>
 
 <button @onclick="@(()=>modal.Show<CommonCUModal>
 ("Add Customer", new ModalParameters()
     .Add(nameof(CommonCUModal.IsCreateCustomer), true)
     .Add(nameof(CommonCUModal.Action), "Add")))"
-        class="btn btn-primary">
+        class="btn btn-primary mb-2">
     Add Customer
 </button>
 @if (customers == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="spinner"></div>
 }
 else
 {
     <SfGrid DataSource="@customers">
+        <GridEvents CommandClicked="OnCommandClicked" TValue="Customer"></GridEvents>
         <GridColumns>
             <GridColumn Field="@nameof(Customer.Name)"></GridColumn>
             <GridColumn Field="@nameof(Customer.Phone)"></GridColumn>
             <GridColumn Field="@nameof(Customer.Address)"></GridColumn>
             <GridColumn Field="@nameof(Customer.Email)"></GridColumn>
+            <GridColumn HeaderText="Action" TextAlign="TextAlign.Left">
+                <GridCommandColumns>
+                    <GridCommandColumn Type="CommandButtonType.Edit" ButtonOption="@(new CommandButtonOptions() { IconCss = "oi oi-pencil", Content = "Edit" })"></GridCommandColumn>
+                    <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() { IconCss = "oi oi-delete", Content = "Delete" })"></GridCommandColumn>
+                </GridCommandColumns>
+            </GridColumn>
         </GridColumns>
     </SfGrid>
-    @*<table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in customers)
-            {
-                <tr>
-                    <td>@customer.Name</td>
-                    <td>@customer.Phone</td>
-                    <td>@customer.Address</td>
-                    <td>@customer.Email</td>
-                    <td>
-                        <div @onclick="@(()=> modal.Show<CommonCUModal>("Update Customer",
-                            new ModalParameters()
-                            .Add(nameof(CommonCUModal.IsCreateCustomer), true)
-                            .Add(nameof(CommonCUModal.Id), customer.Id)))"
-                            class="oi oi-pencil"></div>
-                        <div @onclick="@(() => DeleteCustomer(customer.Id))" class="oi oi-delete"></div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
 }
 
 @code {
     private List<Customer>? customers;
 
+    public async void OnCommandClicked(CommandClickEventArgs<Customer> args)
+    {
+        if (args.CommandColumn.ButtonOption.Content == "Edit")
+        {
+            ShowModal(args.RowData.Id);
+        }
+        else if (args.CommandColumn.ButtonOption.Content == "Delete")
+        {
+            await DeleteCustomer(args.RowData.Id);
+        }
+    }
+
     protected override async Task OnInitializedAsync()
     {
         customers = await Http.GetFromJsonAsync<List<Customer>>("customer-api/Customers/Get");
+    }
+
+    public void ShowModal(int id)
+    {
+        modal.Show<CommonCUModal>("Update Customer",
+                new ModalParameters()
+                .Add(nameof(CommonCUModal.IsCreateCustomer), true)
+                .Add(nameof(CommonCUModal.Id), id));
     }
 
     protected async Task DeleteCustomer(int id)

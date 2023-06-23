@@ -27,4 +27,8 @@
     <Folder Include="wwwroot\css\customer-css\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\common\common.css" />
+  </ItemGroup>
+
 </Project>

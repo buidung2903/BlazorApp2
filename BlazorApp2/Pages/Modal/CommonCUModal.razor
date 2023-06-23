@@ -4,48 +4,51 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<form>
-    <div class="mt-md-2">
-        <label class="col-md-2">Name</label>
-        <input class="col-md-9" type="text" name="name" id="name" @bind-value="Name" />
-        <input hidden type="text" name="id" id="id" @bind-value="Id" />
-    </div>
-    @if (IsCreateCustomer)
-    {
+@if (Action == "Add" || customer.Email != null && Action != "Add")
+{
+    <form>
         <div class="mt-md-2">
-            <label class="col-md-2">Phone</label>
-            <input class="col-md-9" type="text" name="phone" id="phone" @bind-value="customer.Phone" />
+            <label class="col-md-2">Name</label>
+            <input class="col-md-9" type="text" name="name" id="name" @bind-value="Name" />
+            <input hidden type="text" name="id" id="id" @bind-value="Id" />
         </div>
-        <div class="mt-md-2">
-            <label class="col-md-2">Address</label>
-            <input class="col-md-9" type="text" name="address" id="address" @bind-value="customer.Address" />
-        </div>
-        <div class="mt-md-2">
-            <label class="col-md-2">Email</label>
-            <input class="col-md-9" type="text" name="email" id="email" @bind-value="customer.Email" />
-        </div>
+        @if (IsCreateCustomer)
+        {
+            <div class="mt-md-2">
+                <label class="col-md-2">Phone</label>
+                <input class="col-md-9" type="text" name="phone" id="phone" @bind-value="customer.Phone" />
+            </div>
+            <div class="mt-md-2">
+                <label class="col-md-2">Address</label>
+                <input class="col-md-9" type="text" name="address" id="address" @bind-value="customer.Address" />
+            </div>
+            <div class="mt-md-2">
+                <label class="col-md-2">Email</label>
+                <input class="col-md-9" type="text" name="email" id="email" @bind-value="customer.Email" />
+            </div>
 
-    }
-    else
-    {
-        <div class="mt-md-2">
-            <label class="col-md-2">SKU</label>
-            <input class="col-md-9" type="text" name="sku" id="sku" @bind-value="product.Sku" />
-        </div>
-    }
-    @if (Id == null)
-    {
-        <div class="mt-md-2 tl-center">
-            <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? CreateCustomer : CreateProduct">@(IsCreateCustomer ? "Add Customer" : "Add Product")</button>
-        </div>
-    }
-    else
-    {
-        <div class="mt-md-2 tl-center">
-            <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? UpdateCustomer : UpdateProduct">@(IsCreateCustomer ? "Update Customer" : "Update Product")</button>
-        </div>
-    }
-</form>
+        }
+        else
+        {
+            <div class="mt-md-2">
+                <label class="col-md-2">SKU</label>
+                <input class="col-md-9" type="text" name="sku" id="sku" @bind-value="product.Sku" />
+            </div>
+        }
+        @if (Id == null)
+        {
+            <div class="mt-md-2 tl-center">
+                <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? CreateCustomer : CreateProduct">@(IsCreateCustomer ? "Add Customer" : "Add Product")</button>
+            </div>
+        }
+        else
+        {
+            <div class="mt-md-2 tl-center">
+                <button class="btn btn-primary" type="button" @onclick="IsCreateCustomer ? UpdateCustomer : UpdateProduct">@(IsCreateCustomer ? "Update Customer" : "Update Product")</button>
+            </div>
+        }
+    </form>
+}
 
 @code {
     [Parameter] public bool IsCreateCustomer { get; set; }
