@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using Models.EntityClass;
 using Models.Models;
+using Services.Repository;
 
 namespace Services.CQRS.Command
 {
@@ -18,9 +19,11 @@ namespace Services.CQRS.Command
         public class CreateProductCommandHandle : IRequestHandler<CreateProductCommand, int>
         {
             private readonly FFDbContext _context;
-            public CreateProductCommandHandle(FFDbContext context)
+            private readonly IUnitOfWork _unitOfWork;
+            public CreateProductCommandHandle(FFDbContext context, IUnitOfWork unitOfWork)
             {
                 _context = context;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<int> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -28,8 +31,8 @@ namespace Services.CQRS.Command
                 var product = new Product();
                 product.Name = command.Name;
                 product.Sku = command.Sku;
-                await _context.Products.AddAsync(product);
-                await _context.SaveChangesAsync();
+                await _unitOfWork.ProductService.Add(product);
+                await _unitOfWork.SaveChanges();
                 return product.Id;
             }
         }

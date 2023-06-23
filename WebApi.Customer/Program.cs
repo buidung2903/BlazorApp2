@@ -9,6 +9,7 @@ using Services.Services;
 using Helper.Extensions;
 using Microsoft.AspNetCore.Hosting.Server;
 using NLog.Web;
+using Services.Repository;
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ var assembly = AppDomain.CurrentDomain.Load("Services");
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IMediator, ConcreteMediator>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddConsulConfig(builder.Configuration);
 var mapperConfig = new MapperConfiguration(mc =>
 {

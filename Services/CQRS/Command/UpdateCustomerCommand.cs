@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models.EntityClass;
 using Models.Models;
+using Services.Repository;
 
 namespace Services.CQRS.Command
 {
@@ -22,21 +23,23 @@ namespace Services.CQRS.Command
         public class UpdateCustomerCommandHandle : IRequestHandler<UpdateCustomerCommand, int>
         {
             private readonly FFDbContext _context;
-            public UpdateCustomerCommandHandle(FFDbContext context)
+            private readonly IUnitOfWork _unitOfWork;
+            public UpdateCustomerCommandHandle(FFDbContext context, IUnitOfWork unitOfWork)
             {
+                _unitOfWork = unitOfWork;
                 _context = context;
             }
 
             public async Task<int> Handle(UpdateCustomerCommand command, CancellationToken cancellationToken)
             {
-                var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Id == command.Id);
+                var customer = await _unitOfWork.CustomerService.GetById(command.Id);
                 if (customer == null) return default;
                 customer.Name = command.Name;
                 customer.Phone = command.Phone;
                 customer.Address = command.Address;
                 customer.Email = command.Email;
-                _context.Customers.Update(customer);
-                await _context.SaveChangesAsync();
+                _unitOfWork.CustomerService.Update(customer);
+                await _unitOfWork.SaveChanges();
                 return customer.Id;
             }
         }

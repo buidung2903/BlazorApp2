@@ -6,6 +6,7 @@ using NLog;
 using Services.CQRS.Command;
 using Services.CQRS.Query;
 using Services.Interfaces;
+using Services.Repository;
 using Services.Services;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -21,12 +22,15 @@ namespace WebApi.Customer.Controllers
         private readonly IMediator _mediator;
         private readonly ILogger<CustomersController> _logger;
         private static Logger logger = LogManager.GetLogger("CustomersController");
-
-        public CustomersController(ICustomerService customerService, IMediator mediator, ILogger<CustomersController> logger)
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public CustomersController(ICustomerService customerService, IMediator mediator, ILogger<CustomersController> logger, ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerService = customerService;
             _mediator = mediator;
             _logger = logger;
+            _customerRepository = customerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/<CustomersController>

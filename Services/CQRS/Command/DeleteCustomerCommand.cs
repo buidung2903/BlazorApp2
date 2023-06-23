@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models.EntityClass;
 using Models.Models;
+using Services.Repository;
 
 namespace Services.CQRS.Command
 {
@@ -18,17 +19,19 @@ namespace Services.CQRS.Command
         public class DeleteCustomerCommandHandle : IRequestHandler<DeleteCustomerCommand, int>
         {
             private readonly FFDbContext _context;
-            public DeleteCustomerCommandHandle(FFDbContext context)
+            private readonly IUnitOfWork _unitOfWork;
+            public DeleteCustomerCommandHandle(FFDbContext context, IUnitOfWork unitOfWork)
             {
                 _context = context;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<int> Handle(DeleteCustomerCommand command, CancellationToken cancellationToken)
             {
-                var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Id == command.Id);
+                var customer = await _unitOfWork.CustomerService.GetById(command.Id);
                 if (customer == null) return default;
-                _context.Customers.Remove(customer);
-                await _context.SaveChangesAsync();
+                _unitOfWork.CustomerService.Delete(customer);
+                await _unitOfWork.SaveChanges();
                 return customer.Id;
             }
         }

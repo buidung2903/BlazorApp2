@@ -6,6 +6,7 @@ using NLog;
 using Services.CQRS.Command;
 using Services.CQRS.Query;
 using Services.Interfaces;
+using Services.Repository;
 using Services.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,11 +21,16 @@ namespace WebApi.Product.Controllers
         private readonly IMediator _mediator;
         private static Logger logger = LogManager.GetLogger("ProductsController");
         private readonly ILogger<ProductsController> _logger;
-        public ProductsController(IProductService productService, IMediator mediator, ILogger<ProductsController> logger)
+        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductsController(IProductService productService, IMediator mediator, ILogger<ProductsController> logger, IProductRepository productRepository, IUnitOfWork unitOfWork)
         {
             _productService = productService;
             _mediator = mediator;
             _logger = logger;
+            _unitOfWork = unitOfWork;
+            _productRepository = productRepository;
         }
 
         // GET: api/<ProductsController>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models.EntityClass;
 using Models.Models;
+using Services.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,15 @@ namespace Services.CQRS.Query
         public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQuery, IEnumerable<Product>>
         {
             private readonly FFDbContext _context;
-            public GetAllProductQueryHandler(FFDbContext context)
+            private readonly IUnitOfWork _unitOfWork;
+            public GetAllProductQueryHandler(FFDbContext context, IUnitOfWork unitOfWork)
             {
                 _context = context;
+                _unitOfWork = unitOfWork;
             }
             public async Task<IEnumerable<Product>> Handle(GetAllProductQuery query, CancellationToken cancellationToken)
             {
-                var productList = await _context.Products.ToListAsync();
+                var productList = await _unitOfWork.ProductService.GetAll();
                 return productList;
             }
         }
